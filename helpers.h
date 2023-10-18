@@ -12,3 +12,5 @@ void edges(int height, int width, RGBTRIPLE image[height][width]);
 // Blur image
 void blur(int height, int width, RGBTRIPLE image[height][width]);
 
+// Convert image to ASCII text
+void ascii(int height, int width, RGBTRIPLE image[height][width]);

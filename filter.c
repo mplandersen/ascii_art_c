@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     // Define allowable filters
-    char *filters = "begra";
+    char *filters = "abegr";
 
     // Get filter flag and check validity
     char filter = getopt(argc, argv, filters);
@@ -100,6 +100,14 @@ int main(int argc, char *argv[])
     // Filter image
     switch (filter)
     {
+        // ASCII
+        case 'a':
+            ascii(height, width, image);
+            // export txt within function so change break to return and close files
+            fclose(inptr);
+            fclose(outptr);
+            return 0;
+
         // Blur
         case 'b':
             blur(height, width, image);

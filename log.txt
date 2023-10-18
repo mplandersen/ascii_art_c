@@ -1,0 +1,5 @@
+1. Issue with compiler, have to manually paste makefile because the command make does not work
+
+2. Using scrabble for inspiration in making the ASCII list
+
+3. 255/69 = 
