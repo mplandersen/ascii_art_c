@@ -1,5 +1,6 @@
 #include "helpers.h"
 #include <math.h>
+#include <stdio.h>
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -214,6 +215,67 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             image[i][j].rgbtRed = copy[i][j].rgbtRed;
         }
     }
+
+
+    return;
+}
+
+//ASCII conversion
+void ascii(int height, int width, RGBTRIPLE image[height][width])
+{
+    //convert image to greyscale
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            int average = round(round((image[i][j].rgbtBlue + image[i][j].rgbtGreen + image[i][j].rgbtRed)) / 3);
+            image[i][j].rgbtBlue = average;
+            image[i][j].rgbtGreen = average;
+            image[i][j].rgbtRed = average;
+        }
+    }
+
+    // ascii list
+    char ascii[] = {' ','.', '`', '^', '"', ',', ':', ';', 'I', 'l', '!', 'i', '>', '<', '~', '+', '_', '-', '?', ']', '[', '}', '{', '1', ')', '(', '|', '\\', '/', 't', 'f', 'j', 'r', 'x', 'n', 'u', 'v', 'c', 'z', 'X', 'Y', 'U', 'J', 'C', 'L', 'Q', '0', 'O', 'Z', 'm', 'w', 'q', 'p', 'd', 'b', 'k', 'h', 'a', 'o', '*', '#', 'M', 'W', '&', '8', '%', 'B', '@'};
+
+    // create 2D array to 
+    char art[height][width];
+
+
+    // print ascii symbols based on greyscale
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            int average = image[i][j].rgbtBlue;
+            int n = (68 * average)/255;
+            art[i][j] = ascii[n];
+
+        }
+    }
+
+    // set newline 
+    char newline = '\n';
+
+    // export art 2D array to txt
+    FILE *file = fopen("output.txt", "w");
+    if (file != NULL)
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                fprintf(file, "%c", art[i][j]);
+
+                // bring cursor to new line in the file when it reaches the end of the width
+                if (j == (width - 1))
+                {
+                    fprintf(file, "%c", newline);
+                }
+            }
+        }
+    }
+    fclose(file);
 
 
     return;
