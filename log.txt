@@ -2,4 +2,4 @@
 
 2. Using scrabble for inspiration in making the ASCII list
 
-3. 255/69 = 
+3. 68*average/255
